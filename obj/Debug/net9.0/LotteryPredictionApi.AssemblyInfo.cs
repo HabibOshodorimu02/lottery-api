@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LotteryPredictionApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23f87e225a704d7af03b0c3d991a1d68d0f91329")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f5fa694632d785ec60b05801d83790c1ae01c18")]
 [assembly: System.Reflection.AssemblyProductAttribute("LotteryPredictionApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LotteryPredictionApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
