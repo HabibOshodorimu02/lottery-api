@@ -6,6 +6,7 @@ using System.Text;
 using LotteryPredictionApi.Data;
 using LotteryPredictionApi.Services;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -54,6 +55,10 @@ builder.Services.AddSwaggerGen(c =>
 // Add Entity Framework
 builder.Services.AddDbContext<LotteryDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// JWT configuration - uses keys from appsettings.json
+var jwtSecret = builder.Configuration["Jwt:SecretKey"];
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret ?? ""));
 
 // Add JWT Authentication
 builder.Services.AddAuthentication(options =>
