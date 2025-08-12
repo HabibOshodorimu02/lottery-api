@@ -56,9 +56,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<LotteryDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// JWT configuration - uses keys from appsettings.json
-var jwtSecret = builder.Configuration["Jwt:SecretKey"];
-var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret ?? ""));
 
 // Add JWT Authentication
 builder.Services.AddAuthentication(options =>
@@ -98,18 +95,22 @@ builder.Services.AddCors(options =>
     });
 });
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Enable Swagger for all environments
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lottery Prediction API V1");
-        c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Lottery Prediction API V1");
+    c.RoutePrefix = "swagger"; // Swagger UI at /swagger
+});
+
+// Optional: root endpoint with a welcome message
+app.MapGet("/", () => Results.Ok("Lottery Prediction API is running. Visit /swagger for documentation."));
+
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
